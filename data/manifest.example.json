@@ -1,0 +1,8 @@
+[
+  {
+    "case_id": "case_0001",
+    "ct": "/path/to/skull_stripped_ct/case_0001.nii.gz",
+    "cta": "/path/to/skull_stripped_cta/case_0001.nii.gz",
+    "vessel_mask": "/path/to/vessel_masks/case_0001.nii.gz"
+  }
+]

@@ -1,0 +1,56 @@
+
+data:
+  train_list: ./data/train.json
+  ct_brain_window: [90, 35]
+  cta_window: [400, 40]
+  num_slices_context: 5
+  z_weight_middle: 1.5
+  z_middle_range: [0.25, 0.75]
+  rotation_prob: 0.3
+  vessel_density_weight: 0.0
+  cache_size_cases: 4
+
+model:
+  architecture: anatomy_guided
+  in_channels: 6
+  out_channels: 1
+  base_ch: 48
+  emb_dim: 256
+  dropout: 0.1
+  anatomy_channels: [32, 64, 128, 192, 256]
+  fpn_channels: 64
+  prior_input: true
+  enhancement_head: true
+
+diffusion:
+  sampler_steps: 5
+  ensemble_k: 4
+  cfg_dropout: 0.0
+  cfg_scale: 1.0
+
+training:
+  epochs: 60
+  batch_size: 2
+  lr: 1.0e-4
+  lr_min: 1.0e-6
+  lr_schedule: cosine
+  betas: [0.9, 0.999]
+  weight_decay: 1.0e-4
+  ema_decay: 0.9995
+  grad_clip: 1.0
+  amp: true
+  amp_dtype: bfloat16
+  augment: true
+  flow_vessel_factor: 4.0
+  locator_scale_weights: [1.0, 0.5, 0.25, 0.125, 0.0625]
+  locator_bce_weight: 0.10
+  locator_dice_weight: 0.10
+  locator_cldice_weight: 0.015
+  cldice_iterations: 5
+  locator_enhancement_weight: 0.10
+  intensity_coefficient: 0.1
+  save_interval: 3
+  output_dir: ./outputs/run
+  num_workers: 4
+  prefetch_factor: 2
+  seed: 42
